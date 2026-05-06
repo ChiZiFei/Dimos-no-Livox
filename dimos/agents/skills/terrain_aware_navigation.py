@@ -14,8 +14,8 @@
 
 """地形感知导航技能容器 - 处理台阶、斜坡等地形挑战"""
 
-import time
 from enum import Enum
+import time
 from typing import Any
 
 from reactivex.disposable import Disposable
@@ -24,9 +24,7 @@ from dimos.agents.annotation import skill
 from dimos.core.core import rpc
 from dimos.core.module import Module
 from dimos.core.stream import In
-from dimos.msgs.geometry_msgs import Twist, Vector3
 from dimos.msgs.sensor_msgs import Image, PointCloud2
-from dimos.navigation.base import NavigationState
 from dimos.utils.logging_config import setup_logger
 
 logger = setup_logger()
@@ -325,4 +323,4 @@ class TerrainAwareSkillContainer(Module):
 
 terrain_aware_skill = TerrainAwareSkillContainer.blueprint
 
-__all__ = ["TerrainAwareSkillContainer", "terrain_aware_skill", "TerrainType", "GaitMode"]
+__all__ = ["GaitMode", "TerrainAwareSkillContainer", "TerrainType", "terrain_aware_skill"]

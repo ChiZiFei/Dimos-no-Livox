@@ -20,7 +20,6 @@
 - "绕过障碍物到停车场"
 """
 
-import json
 import threading
 import time
 from typing import Any
@@ -354,7 +353,7 @@ class SmartGuideSkillContainer(Module):
 
                 time.sleep(2.0)  # 检查间隔
 
-        except Exception as e:
+        except Exception:
             logger.exception("Guide loop error")
             self._guide_state = GuideState.FAILED
             self._speak("引导过程中遇到错误。请重新开始或手动导航。")
@@ -457,4 +456,4 @@ class SmartGuideSkillContainer(Module):
 
 smart_guide_skill = SmartGuideSkillContainer.blueprint
 
-__all__ = ["SmartGuideSkillContainer", "smart_guide_skill", "GuideState"]
+__all__ = ["GuideState", "SmartGuideSkillContainer", "smart_guide_skill"]
