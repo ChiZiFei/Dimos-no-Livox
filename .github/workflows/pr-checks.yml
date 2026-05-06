@@ -19,7 +19,7 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: uv.lock
-      - run: uv sync --frozen
+      - run: uv sync --frozen --extra dev
       - run: uv run ruff format --check
       - run: uv run ruff check
 
@@ -31,7 +31,7 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: uv.lock
-      - run: uv sync --frozen
+      - run: uv sync --frozen --extra dev
       # strict=true is aspirational on inherited code; allow non-blocking until tightened
       - run: uv run mypy dimos
         continue-on-error: true
@@ -44,5 +44,5 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: uv.lock
-      - run: uv sync --frozen
+      - run: uv sync --frozen --extra dev
       - run: uv run pytest
