@@ -171,9 +171,7 @@ class TerrainAwareSkillContainer(Module):
 
     @skill
     def navigate_with_terrain_adaptation(
-        self,
-        destination: str,
-        auto_adapt_gait: bool = True
+        self, destination: str, auto_adapt_gait: bool = True
     ) -> str:
         """带地形自适应的导航。在行进过程中自动检测和适应地形变化。
 
@@ -204,11 +202,7 @@ class TerrainAwareSkillContainer(Module):
         if auto_adapt_gait:
             self._start_terrain_monitoring()
 
-        return (
-            f"开始导航至 '{destination}'。"
-            f"当前地形: {initial_terrain}。"
-            f"已启用自动地形适应。"
-        )
+        return f"开始导航至 '{destination}'。当前地形: {initial_terrain}。已启用自动地形适应。"
 
     @skill
     def climb_stairs(self, estimated_steps: int = 0) -> str:
@@ -299,6 +293,7 @@ class TerrainAwareSkillContainer(Module):
 
         # 返回最频繁出现的地形类型
         from collections import Counter
+
         counter = Counter(self._terrain_history)
         return counter.most_common(1)[0][0]
 

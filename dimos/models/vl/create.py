@@ -10,7 +10,9 @@ def create(name: VlModelName) -> VlModel:
     match name:
         case "qwen":
             from dimos.models.vl.qwen import QwenVlModel
+
             return QwenVlModel()
         case "moondream":
             from dimos.models.vl.moondream import MoondreamVlModel
+
             return MoondreamVlModel()
