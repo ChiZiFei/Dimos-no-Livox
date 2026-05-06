@@ -1,0 +1,16 @@
+# CODEOWNERS — see https://docs.github.com/articles/about-code-owners
+# Last matching pattern wins.
+
+# Default owner for everything in the repo
+*                                       @ChiZiFei
+
+# Robotics / network stack — dual review for the Go2 + Mid-360 surfaces
+/dimos/robot/unitree/                   @ChiZiFei @echoyan0316-coder
+/dimos/robot/unitree_webrtc/            @ChiZiFei @echoyan0316-coder
+/dimos/robot/unitree/go2/slam_*.py      @ChiZiFei @echoyan0316-coder
+/dimos/robot/unitree/go2/blueprints/    @ChiZiFei @echoyan0316-coder
+
+# CI / repo meta — single owner is fine
+/.github/                               @ChiZiFei
+/pyproject.toml                         @ChiZiFei
+/.pre-commit-config.yaml                @ChiZiFei

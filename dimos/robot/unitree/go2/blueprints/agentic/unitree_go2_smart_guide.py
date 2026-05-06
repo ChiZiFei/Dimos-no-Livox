@@ -43,31 +43,31 @@ from dimos.robot.unitree.unitree_skill_container import unitree_skills
 
 # 智能引导所需的基础模块
 _guide_common = autoconnect(
-    unitree_skills(),           # 基础运动控制
-    speak_skill(),              # 语音输出
-    navigation_skill(),         # 导航技能
-    gps_nav_skill(),            # GPS导航
+    unitree_skills(),  # 基础运动控制
+    speak_skill(),  # 语音输出
+    navigation_skill(),  # 导航技能
+    gps_nav_skill(),  # GPS导航
 )
 
 # 高级地形感知模块
 _terrain_modules = autoconnect(
-    terrain_aware_skill(),      # 地形感知
-    detection_3d_module(),      # 3D检测用于地形分析
+    terrain_aware_skill(),  # 地形感知
+    detection_3d_module(),  # 3D检测用于地形分析
 )
 
 # 智能引导完整模块
 _smart_guide = autoconnect(
-    smart_guide_skill(),        # 智能引导核心
-    person_follow_skill(),      # 人员跟随
+    smart_guide_skill(),  # 智能引导核心
+    person_follow_skill(),  # 人员跟随
 )
 
 # 完整的智能引导 Blueprint
 # 使用方式: dimos run unitree-go2-smart-guide
 unitree_go2_smart_guide = autoconnect(
-    unitree_go2_spatial,        # 基础机器人连接（相机、激光雷达、导航）
-    _guide_common,              # 引导和语音
-    _terrain_modules,           # 地形感知
-    _smart_guide,               # 智能引导
+    unitree_go2_spatial,  # 基础机器人连接（相机、激光雷达、导航）
+    _guide_common,  # 引导和语音
+    _terrain_modules,  # 地形感知
+    _smart_guide,  # 智能引导
     agent(system_prompt=ADVANCED_SYSTEM_PROMPT),  # LLM Agent with advanced prompt
 )
 

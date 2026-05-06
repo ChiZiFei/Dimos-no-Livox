@@ -1,30 +1,24 @@
 ## Problem
 
-<!-- What feature are you adding, or what is broken/missing/sub-optimal? -->
-<!-- Context, symptoms, motivation. Link the issue. -->
-
-Closes DIM-XXX
+<!-- 这个 PR 要解决什么问题 / 加什么功能？给上下文、症状、动机。 -->
+<!-- 如果有关联 Issue，链上：Closes #123 -->
 
 ## Solution
 
-<!-- What you changed and why this approach -->
-<!-- Key design decisions / tradeoffs -->
-<!-- Keep it high-signal; deep planning belongs in the issue. -->
+<!-- 改了什么、为什么这样改、关键设计决策与权衡。 -->
 
 ## Breaking Changes
 
-<!-- Write "None" if not applicable -->
-
-<!-- If applicable:
-- what breaks
-- who is affected
-- migration steps
--->
+<!-- 没有就写 None。有的话写：什么坏了 / 影响谁 / 怎么迁移。 -->
 
 ## How to Test
 
-<!-- MUST be reproducible. If this section is weak, reviewers can't approve confidently. -->
+<!-- 必须可复现。复现命令 / 硬件前置条件 / 预期输出。 -->
+<!-- 涉及 Go2 / Mid-360 实机的，写清楚连了哪台 dock PC 与网络拓扑。 -->
 
-## Contributor License Agreement
+## Checklist
 
-- [ ] I have read and approved the [CLA](https://github.com/dimensionalOS/dimos/blob/main/CLA.md).
+- [ ] `uv run ruff format --check` 通过
+- [ ] `uv run ruff check` 通过
+- [ ] `uv run pytest` 通过（或解释跳过的原因）
+- [ ] 涉及实机的改动已在 Go2 上跑过

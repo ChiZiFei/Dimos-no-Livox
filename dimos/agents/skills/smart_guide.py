@@ -20,7 +20,6 @@
 - "绕过障碍物到停车场"
 """
 
-import json
 import threading
 import time
 from typing import Any
@@ -41,6 +40,7 @@ logger = setup_logger()
 
 class GuideState:
     """引导状态"""
+
     IDLE = "idle"
     NAVIGATING = "navigating"
     TERRAIN_ADAPTING = "terrain_adapting"
@@ -151,9 +151,7 @@ class SmartGuideSkillContainer(Module):
         # 3. 启动引导线程
         self._should_stop.clear()
         self._navigation_thread = threading.Thread(
-            target=self._guide_loop,
-            args=(parsed_dest, user_preference),
-            daemon=True
+            target=self._guide_loop, args=(parsed_dest, user_preference), daemon=True
         )
         self._navigation_thread.start()
 
@@ -179,9 +177,7 @@ class SmartGuideSkillContainer(Module):
         if direction == "up":
             self._speak("前面有向上的台阶，我来爬楼梯，请稍等。")
             try:
-                climb_rpc = self.get_rpc_calls(
-                    "TerrainAwareSkillContainer.climb_stairs"
-                )
+                climb_rpc = self.get_rpc_calls("TerrainAwareSkillContainer.climb_stairs")
                 result = climb_rpc()
                 return f"正在上楼梯: {result}"
             except Exception as e:
@@ -189,9 +185,7 @@ class SmartGuideSkillContainer(Module):
         else:
             self._speak("前面有向下的台阶，小心下楼梯。")
             try:
-                descend_rpc = self.get_rpc_calls(
-                    "TerrainAwareSkillContainer.descend_stairs"
-                )
+                descend_rpc = self.get_rpc_calls("TerrainAwareSkillContainer.descend_stairs")
                 result = descend_rpc()
                 return f"正在下楼梯: {result}"
             except Exception as e:
@@ -317,6 +311,7 @@ class SmartGuideSkillContainer(Module):
     def _is_gps_coordinates(self, text: str) -> bool:
         """检查文本是否是GPS坐标格式"""
         import re
+
         # 匹配格式: "37.8059,-122.4290" 或 "37.8059, -122.4290"
         pattern = r"^-?\d+\.?\d*\s*,\s*-?\d+\.?\d*$"
         return bool(re.match(pattern, text.strip()))
@@ -358,7 +353,7 @@ class SmartGuideSkillContainer(Module):
 
                 time.sleep(2.0)  # 检查间隔
 
-        except Exception as e:
+        except Exception:
             logger.exception("Guide loop error")
             self._guide_state = GuideState.FAILED
             self._speak("引导过程中遇到错误。请重新开始或手动导航。")
@@ -409,9 +404,7 @@ class SmartGuideSkillContainer(Module):
     def _check_and_adapt_terrain(self) -> str | None:
         """检查并适应地形变化"""
         try:
-            analyze_rpc = self.get_rpc_calls(
-                "TerrainAwareSkillContainer.analyze_terrain_ahead"
-            )
+            analyze_rpc = self.get_rpc_calls("TerrainAwareSkillContainer.analyze_terrain_ahead")
             terrain_result = analyze_rpc()
 
             # 如果检测到需要特殊处理的地形
@@ -463,4 +456,4 @@ class SmartGuideSkillContainer(Module):
 
 smart_guide_skill = SmartGuideSkillContainer.blueprint
 
-__all__ = ["SmartGuideSkillContainer", "smart_guide_skill", "GuideState"]
+__all__ = ["GuideState", "SmartGuideSkillContainer", "smart_guide_skill"]

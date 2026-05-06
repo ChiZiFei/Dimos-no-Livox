@@ -8,18 +8,14 @@ and publishes to DimOS internal LCM topics.
 from __future__ import annotations
 
 import threading
-from typing import TYPE_CHECKING
 
 from dimos.core.core import rpc
 from dimos.core.module import Module
 from dimos.core.stream import Out
-from dimos.msgs.geometry_msgs import Point, Pose, PoseStamped, Quaternion, Vector3
+from dimos.msgs.geometry_msgs import Point, Pose, PoseStamped, Quaternion
 from dimos.msgs.nav_msgs import Odometry
 from dimos.msgs.sensor_msgs import PointCloud2, PointField
 from dimos.msgs.std_msgs import Header
-
-if TYPE_CHECKING:
-    import numpy as np
 
 
 class UnitreeSlamBridge(Module):
@@ -52,11 +48,11 @@ class UnitreeSlamBridge(Module):
     def _ros2_loop(self) -> None:
         """ROS2 spin loop in separate thread."""
         try:
+            from geometry_msgs.msg import PoseStamped as RosPoseStamped
+            from nav_msgs.msg import Odometry as RosOdometry
             import rclpy
             from rclpy.node import Node
             from sensor_msgs.msg import PointCloud2 as RosPointCloud2
-            from nav_msgs.msg import Odometry as RosOdometry
-            from geometry_msgs.msg import PoseStamped as RosPoseStamped
 
             rclpy.init()
             node = Node("dimos_slam_bridge")
@@ -134,11 +130,13 @@ class UnitreeSlamBridge(Module):
             import numpy as np
 
             # Parse point cloud data
-            dtype = np.dtype([
-                ('x', np.float32),
-                ('y', np.float32),
-                ('z', np.float32),
-            ])
+            dtype = np.dtype(
+                [
+                    ("x", np.float32),
+                    ("y", np.float32),
+                    ("z", np.float32),
+                ]
+            )
 
             # Extract points from ROS message
             points = np.frombuffer(msg.data, dtype=dtype, count=msg.width * msg.height)

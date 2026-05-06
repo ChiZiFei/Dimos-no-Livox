@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from math import pi
-
 from dimos.core.core import rpc
 from dimos.core.module import Module
 from dimos.core.stream import Out
