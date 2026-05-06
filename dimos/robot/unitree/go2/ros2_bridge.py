@@ -134,11 +134,13 @@ class UnitreeSlamBridge(Module):
             import numpy as np
 
             # Parse point cloud data
-            dtype = np.dtype([
-                ('x', np.float32),
-                ('y', np.float32),
-                ('z', np.float32),
-            ])
+            dtype = np.dtype(
+                [
+                    ("x", np.float32),
+                    ("y", np.float32),
+                    ("z", np.float32),
+                ]
+            )
 
             # Extract points from ROS message
             points = np.frombuffer(msg.data, dtype=dtype, count=msg.width * msg.height)

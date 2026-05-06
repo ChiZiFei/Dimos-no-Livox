@@ -119,9 +119,24 @@ def demo_gait_modes():
 
     gait_configs = {
         GaitMode.NORMAL: {"body_height": 0.3, "speed_level": 1, "description": "正常行走"},
-        GaitMode.CLIMB: {"body_height": 0.4, "speed_level": 0, "foot_raise": 0.15, "description": "爬楼梯 - 抬高身体、高举脚"},
-        GaitMode.DESCEND: {"body_height": 0.25, "speed_level": 0, "foot_raise": 0.08, "description": "下楼梯 - 降低身体、小步幅"},
-        GaitMode.SLOW: {"body_height": 0.3, "speed_level": 0, "foot_raise": 0.1, "description": "慢速 - 谨慎通过"},
+        GaitMode.CLIMB: {
+            "body_height": 0.4,
+            "speed_level": 0,
+            "foot_raise": 0.15,
+            "description": "爬楼梯 - 抬高身体、高举脚",
+        },
+        GaitMode.DESCEND: {
+            "body_height": 0.25,
+            "speed_level": 0,
+            "foot_raise": 0.08,
+            "description": "下楼梯 - 降低身体、小步幅",
+        },
+        GaitMode.SLOW: {
+            "body_height": 0.3,
+            "speed_level": 0,
+            "foot_raise": 0.1,
+            "description": "慢速 - 谨慎通过",
+        },
     }
 
     for gait, config in gait_configs.items():

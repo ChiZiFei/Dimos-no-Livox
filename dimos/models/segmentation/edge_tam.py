@@ -38,7 +38,7 @@ from dimos.utils.logging_config import setup_logger
 if TYPE_CHECKING:
     from sam2.sam2_video_predictor import SAM2VideoPredictor
 
-os.environ['TQDM_DISABLE'] = '1'
+os.environ["TQDM_DISABLE"] = "1"
 
 logger = setup_logger()
 
@@ -81,9 +81,7 @@ class EdgeTAMProcessor(Detector):
             OmegaConf.update(cfg, key, value)
 
         if cfg.model._target_ != "sam2.sam2_video_predictor.SAM2VideoPredictor":
-            logger.warning(
-                f"Config target is {cfg.model._target_}, forcing SAM2VideoPredictor"
-            )
+            logger.warning(f"Config target is {cfg.model._target_}, forcing SAM2VideoPredictor")
             cfg.model._target_ = "sam2.sam2_video_predictor.SAM2VideoPredictor"
 
         self._predictor = instantiate(cfg.model, _recursive_=True)

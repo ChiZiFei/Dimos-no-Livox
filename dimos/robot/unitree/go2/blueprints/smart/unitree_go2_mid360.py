@@ -100,6 +100,7 @@ def _static_base_link(rr: Any) -> list[Any]:
 
 def _go2_rerun_blueprint() -> Any:
     import rerun.blueprint as rrb
+
     return rrb.Blueprint(
         rrb.Horizontal(
             rrb.Spatial2DView(origin="world/color_image", name="Camera"),
@@ -150,21 +151,18 @@ unitree_go2_basic_no_lidar = (
 )
 
 # Main blueprint
-unitree_go2_mid360 = (
-    autoconnect(
-        unitree_go2_basic_no_lidar,
-        # Official Mid-360 mount pose from Unitree SDK2 docs
-        mid360_static_tf(),
-        # Navigation modules
-        voxel_mapper(voxel_size=0.1),
-        cost_mapper(),
-        replanning_a_star_planner(),
-        wavefront_frontier_explorer(),
-    )
-    .global_config(
-        n_workers=8,
-        robot_model="unitree_go2_mid360",
-    )
+unitree_go2_mid360 = autoconnect(
+    unitree_go2_basic_no_lidar,
+    # Official Mid-360 mount pose from Unitree SDK2 docs
+    mid360_static_tf(),
+    # Navigation modules
+    voxel_mapper(voxel_size=0.1),
+    cost_mapper(),
+    replanning_a_star_planner(),
+    wavefront_frontier_explorer(),
+).global_config(
+    n_workers=8,
+    robot_model="unitree_go2_mid360",
 )
 
 __all__ = ["unitree_go2_mid360"]
