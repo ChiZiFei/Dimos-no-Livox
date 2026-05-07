@@ -1,5 +1,4 @@
-default_stages: [pre-commit]
-default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [commit]
 exclude: (dimos/models/.*)|(deprecated)
 repos:
 
@@ -23,7 +22,7 @@ repos:
     rev: v0.14.3
     hooks:
       - id: ruff-format
-        stages: [pre-commit]
+        stages: [commit]
       - id: ruff-check
         args: [--fix, --unsafe-fixes]
 
@@ -90,7 +89,7 @@ repos:
         name: Doclinks
         always_run: true
         pass_filenames: false
-        entry: python -m dimos.utils.docs.doclinks docs/
+        entry: python3 -m dimos.utils.docs.doclinks docs/
         language: system
         files: ^docs/.*\.md$
 
